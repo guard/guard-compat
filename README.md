@@ -7,8 +7,8 @@ Currently, provides only a test helper for testing custom Guard plugins.
 Add this to your application's Gemfile:
 
 ```ruby
-group :development do
-  gem 'guard-compat', require: false
+group :test do
+  gem 'guard-compat', '>= 0.0.2', require: false
 end
 ```
 
@@ -21,8 +21,8 @@ And then execute:
 Put the following notes in your plugin file (e.g. `lib/guard/myplugin.rb`):
 
 ```ruby
-# Do NOT require "guard/plugin"
-# It will either be required or a stub will be supplied by the test class
+# Do NOT require "guard/plugin" - it should already required
+# by Guard or by the test helper
 ```
 
 And in your plugin tests (e.g. `spec/lib/guard/myplugin_spec.rb`):
@@ -35,8 +35,9 @@ require 'guard/myplugin'
 ```
 ## Example
 
-See `lib/guard/example.rb` for an example plugin implementation.
+See [lib/guard/compat/example.rb](https://github.com/guard/guard-compat/blob/master/lib/guard/compat/example.rb ) for an example plugin implementation.
 
+See [spec/guard/compat/example_spec.rb](https://github.com/guard/guard-compat/blob/master/spec/guard/compat/example_spec.rb) for an example on how to test plugins using Guard::Compat.
 
 ## Contributing
 
