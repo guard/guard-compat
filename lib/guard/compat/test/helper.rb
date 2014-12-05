@@ -9,29 +9,29 @@ module Guard
   end
 
   class Notifier
-    def self.notify(_msg, _options)
+    def self.notify(_msg, _options = {})
       fail NotImplementedError, 'stub this method in your tests'
     end
   end
 
   class UI
-    def self.info(_msg)
+    def self.info(_msg, _options = {})
       fail NotImplementedError, 'stub this method in your tests'
     end
 
-    def self.warning(_msg)
+    def self.warning(_msg, _options = {})
       fail NotImplementedError, 'stub this method in your tests'
     end
 
-    def self.error(_msg)
+    def self.error(_msg, _options = {})
       fail NotImplementedError, 'stub this method in your tests'
     end
 
-    def self.debug(_msg)
+    def self.debug(_msg, _options = {})
       fail NotImplementedError, 'stub this method in your tests'
     end
 
-    def self.deprecation(_msg)
+    def self.deprecation(_msg, _options = {})
       fail NotImplementedError, 'stub this method in your tests'
     end
   end

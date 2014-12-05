@@ -18,14 +18,24 @@ RSpec.describe Guard::MyPlugin, exclude_stubs: [Guard::Plugin] do
   end
 
   it 'uses the notifier' do
-    expect(Guard::Notifier).to receive(:notify).with('foo', title: 'bar')
+    expect(Guard::Notifier).to receive(:notify).with('foo')
     subject.start
+  end
+
+  it 'uses the notifier with options' do
+    expect(Guard::Notifier).to receive(:notify).with('foo', title: 'bar')
+    subject.run_all
   end
 
   %w(info warning error deprecation debug).each do |type|
     it "outputs #{type} messages" do
       expect(Guard::UI).to receive(type.to_sym).with('foo')
       subject.start
+    end
+
+    it "outputs #{type} messages with options" do
+      expect(Guard::UI).to receive(type.to_sym).with('foo', bar: :baz)
+      subject.run_all
     end
   end
 end
