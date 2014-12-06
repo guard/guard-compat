@@ -21,6 +21,8 @@ module Guard
       Guard::UI.error('foo', bar: :baz)
       Guard::UI.debug('foo', bar: :baz)
       Guard::UI.deprecation('foo', bar: :baz)
+
+      Guard::UI.color_enabled?
     end
   end
 end

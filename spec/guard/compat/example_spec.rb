@@ -11,6 +11,8 @@ RSpec.describe Guard::MyPlugin, exclude_stubs: [Guard::Plugin] do
     %w(info warning error deprecation debug).each do |type|
       allow(Guard::UI).to receive(type.to_sym)
     end
+
+    allow(Guard::UI).to receive(:color_enabled?).and_return(false)
   end
 
   it 'passes options' do
@@ -42,4 +44,10 @@ RSpec.describe Guard::MyPlugin, exclude_stubs: [Guard::Plugin] do
       subject.run_all
     end
   end
+
+  it 'uses the UI color_enabled? method' do
+    expect(Guard::UI).to receive(:color_enabled?).and_return(true)
+    subject.run_all
+  end
+
 end

@@ -44,6 +44,10 @@ module Guard
       def self.deprecation(_msg, _options = {})
         fail NotImplementedError, 'stub this method in your tests'
       end
+
+      def self.color_enabled?
+        fail NotImplementedError, 'stub this method in your tests'
+      end
     end
   end
 end
