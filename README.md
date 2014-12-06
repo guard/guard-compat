@@ -32,6 +32,13 @@ end
 
 ```
 
+In your gemspec:
+
+```ruby
+s.add_dependency('guard-compat', '~> 0.1')
+```
+
+
 ### IMPORTANT
 
 1) Do not include *any* files from Guard directly (if you need something from Guard which Guard::Compat doesn't provide, file an issue)
