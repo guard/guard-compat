@@ -2,26 +2,18 @@
 
 Currently, provides only a test helper for testing custom Guard plugins.
 
-## Installation
+## Usage (in a Guard plugin)
 
-Add this to your application's Gemfile:
+In your gemspec:
 
 ```ruby
-group :test do
-  gem 'guard-compat', '>= 0.0.2', require: false
-end
+s.add_dependency('guard-compat', '~> 0.3')
 ```
 
-And then execute:
-
-    $ bundle
-
-## Usage
-
-Put the following in your plugin files (e.g. `lib/guard/myplugin.rb`):
+In all your plugin files (e.g. `lib/guard/myplugin.rb`):
 
 ```ruby
-# Don't require "guard/plugin" in hits files
+# Don't require "guard/plugin" here or in any other plugin's files
 require 'guard/compat/plugin'
 
 module Guard
@@ -30,12 +22,6 @@ module Guard
   end
 end
 
-```
-
-In your gemspec:
-
-```ruby
-s.add_dependency('guard-compat', '~> 0.1')
 ```
 
 
