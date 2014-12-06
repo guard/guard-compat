@@ -1,3 +1,6 @@
+# Note: currently, this file only exists to allow Bundler to require this file
+# without crashing (e.g. when Guard hasn't been included)
+
 unless Object.const_defined?('Guard')
   module Guard
   end
