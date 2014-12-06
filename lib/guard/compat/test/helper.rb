@@ -1,4 +1,7 @@
 # Minimal stub allowing a plugin to work
+
+require 'guard/compat/plugin'
+
 module Guard
   class Plugin
     attr_reader :options
