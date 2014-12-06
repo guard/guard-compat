@@ -11,31 +11,39 @@ module Guard
     end
   end
 
-  class Notifier
-    def self.notify(_msg, _options = {})
-      fail NotImplementedError, 'stub this method in your tests'
+  # Stub, but allow real Notifier to be used, because e.g. guard-minitest uses
+  # is while guard-process is being tested
+  unless Object.const_defined?('Guard::Notifier')
+    module Notifier
+      def self.notify(_msg, _options = {})
+        fail NotImplementedError, 'stub this method in your tests'
+      end
     end
   end
 
-  class UI
-    def self.info(_msg, _options = {})
-      fail NotImplementedError, 'stub this method in your tests'
-    end
+  # Stub, but allow real UI to be used, because e.g. guard-minitest uses it
+  # through using Guard::Notifier
+  unless Object.const_defined?('Guard::UI')
+    module UI
+      def self.info(_msg, _options = {})
+        fail NotImplementedError, 'stub this method in your tests'
+      end
 
-    def self.warning(_msg, _options = {})
-      fail NotImplementedError, 'stub this method in your tests'
-    end
+      def self.warning(_msg, _options = {})
+        fail NotImplementedError, 'stub this method in your tests'
+      end
 
-    def self.error(_msg, _options = {})
-      fail NotImplementedError, 'stub this method in your tests'
-    end
+      def self.error(_msg, _options = {})
+        fail NotImplementedError, 'stub this method in your tests'
+      end
 
-    def self.debug(_msg, _options = {})
-      fail NotImplementedError, 'stub this method in your tests'
-    end
+      def self.debug(_msg, _options = {})
+        fail NotImplementedError, 'stub this method in your tests'
+      end
 
-    def self.deprecation(_msg, _options = {})
-      fail NotImplementedError, 'stub this method in your tests'
+      def self.deprecation(_msg, _options = {})
+        fail NotImplementedError, 'stub this method in your tests'
+      end
     end
   end
 end
