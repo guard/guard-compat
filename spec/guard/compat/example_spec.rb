@@ -17,6 +17,10 @@ RSpec.describe Guard::MyPlugin, exclude_stubs: [Guard::Plugin] do
     expect(subject.options).to include(foo: :bar)
   end
 
+  it 'works without options' do
+    expect{ described_class.new}.to_not raise_error
+  end
+
   it 'uses the notifier' do
     expect(Guard::Notifier).to receive(:notify).with('foo')
     subject.start
