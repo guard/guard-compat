@@ -13,7 +13,7 @@ module Guard
 
   # Stub, but allow real Notifier to be used, because e.g. guard-minitest uses
   # is while guard-process is being tested
-  unless Object.const_defined?('Guard::Notifier')
+  unless Guard.const_defined?('Notifier')
     module Notifier
       def self.notify(_msg, _options = {})
         fail NotImplementedError, 'stub this method in your tests'
@@ -23,7 +23,7 @@ module Guard
 
   # Stub, but allow real UI to be used, because e.g. guard-minitest uses it
   # through using Guard::Notifier
-  unless Object.const_defined?('Guard::UI')
+  unless Guard.const_defined?('UI')
     module UI
       def self.info(_msg, _options = {})
         fail NotImplementedError, 'stub this method in your tests'
