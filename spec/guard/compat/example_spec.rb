@@ -7,12 +7,10 @@ RSpec.describe Guard::MyPlugin, exclude_stubs: [Guard::Plugin] do
   subject { described_class.new(options) }
 
   before do
-    allow(Guard::Notifier).to receive(:notify)
-    %w(info warning error deprecation debug).each do |type|
-      allow(Guard::UI).to receive(type.to_sym)
+    meths = %w(info warning error deprecation debug notify color color_enabled?)
+    meths.each do |type|
+      allow(Guard::Compat::UI).to receive(type.to_sym)
     end
-
-    allow(Guard::UI).to receive(:color_enabled?).and_return(false)
   end
 
   it 'passes options' do
@@ -23,31 +21,27 @@ RSpec.describe Guard::MyPlugin, exclude_stubs: [Guard::Plugin] do
     expect { described_class.new }.to_not raise_error
   end
 
-  it 'uses the notifier' do
-    expect(Guard::Notifier).to receive(:notify).with('foo')
-    subject.start
-  end
-
-  it 'uses the notifier with options' do
-    expect(Guard::Notifier).to receive(:notify).with('foo', title: 'bar')
-    subject.run_all
-  end
-
-  %w(info warning error deprecation debug).each do |type|
-    it "outputs #{type} messages" do
-      expect(Guard::UI).to receive(type.to_sym).with('foo')
-      subject.start
-    end
-
-    it "outputs #{type} messages with options" do
-      expect(Guard::UI).to receive(type.to_sym).with('foo', bar: :baz)
-      subject.run_all
+  describe '#start' do
+    before { subject.start }
+    %w(info warning error deprecation debug notify).each do |type|
+      specify do
+        expect(Guard::Compat::UI).to have_received(type.to_sym).with('foo')
+      end
     end
   end
 
-  it 'uses the UI color_enabled? method' do
-    expect(Guard::UI).to receive(:color_enabled?).and_return(true)
-    subject.run_all
+  describe '#run_all' do
+    before { subject.run_all }
+    %w(info warning error deprecation debug notify).each do |type|
+      specify do
+        expect(Guard::Compat::UI).to have_received(type.to_sym)
+          .with('foo', bar: :baz)
+      end
+    end
   end
 
+  describe '#run_on_modifications' do
+    before { subject.run_on_modifications }
+    specify { expect(Guard::Compat::UI).to have_received(:color_enabled?) }
+  end
 end

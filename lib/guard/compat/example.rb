@@ -4,25 +4,29 @@
 module Guard
   class MyPlugin < Plugin
     def start
-      Guard::Notifier.notify('foo')
+      Guard::Compat::UI.notify('foo')
+      Guard::Compat::UI.color('foo')
 
-      Guard::UI.info('foo')
-      Guard::UI.warning('foo')
-      Guard::UI.error('foo')
-      Guard::UI.debug('foo')
-      Guard::UI.deprecation('foo')
+      Guard::Compat::UI.info('foo')
+      Guard::Compat::UI.warning('foo')
+      Guard::Compat::UI.error('foo')
+      Guard::Compat::UI.debug('foo')
+      Guard::Compat::UI.deprecation('foo')
     end
 
     def run_all
-      Guard::Notifier.notify('foo', title: 'bar')
+      Guard::Compat::UI.notify('foo', bar: :baz)
+      Guard::Compat::UI.color('foo', :white)
 
-      Guard::UI.info('foo', bar: :baz)
-      Guard::UI.warning('foo', bar: :baz)
-      Guard::UI.error('foo', bar: :baz)
-      Guard::UI.debug('foo', bar: :baz)
-      Guard::UI.deprecation('foo', bar: :baz)
+      Guard::Compat::UI.info('foo', bar: :baz)
+      Guard::Compat::UI.warning('foo', bar: :baz)
+      Guard::Compat::UI.error('foo', bar: :baz)
+      Guard::Compat::UI.debug('foo', bar: :baz)
+      Guard::Compat::UI.deprecation('foo', bar: :baz)
+    end
 
-      Guard::UI.color_enabled?
+    def run_on_modifications
+      Guard::Compat::UI.color_enabled?
     end
   end
 end

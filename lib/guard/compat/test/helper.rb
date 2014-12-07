@@ -3,8 +3,11 @@
 require 'guard/compat/plugin'
 
 module Guard
+  # Monkey patch Plugin to just keep the interface
   class Plugin
     attr_reader :options
+
+    remove_method(:initialize)
 
     def initialize(options = {})
       @options = options
@@ -15,9 +18,8 @@ module Guard
   # is while guard-process is being tested
   unless Guard.const_defined?('Notifier')
     module Notifier
-      def self.notify(_msg, _options = {})
-        fail NotImplementedError, 'stub this method in your tests'
-      end
+      # NOTE: do not implement anything here, so using any UI methods
+      # causes tests to fail
     end
   end
 
@@ -25,29 +27,8 @@ module Guard
   # through using Guard::Notifier
   unless Guard.const_defined?('UI')
     module UI
-      def self.info(_msg, _options = {})
-        fail NotImplementedError, 'stub this method in your tests'
-      end
-
-      def self.warning(_msg, _options = {})
-        fail NotImplementedError, 'stub this method in your tests'
-      end
-
-      def self.error(_msg, _options = {})
-        fail NotImplementedError, 'stub this method in your tests'
-      end
-
-      def self.debug(_msg, _options = {})
-        fail NotImplementedError, 'stub this method in your tests'
-      end
-
-      def self.deprecation(_msg, _options = {})
-        fail NotImplementedError, 'stub this method in your tests'
-      end
-
-      def self.color_enabled?
-        fail NotImplementedError, 'stub this method in your tests'
-      end
+      # NOTE: do not implement anything here, so using any UI methods
+      # causes tests to fail
     end
   end
 end
