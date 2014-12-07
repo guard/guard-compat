@@ -40,6 +40,10 @@ require 'guard/myplugin'
 
 # And your tests instantiating your plugin go here...
 ```
+
+(OPTIONAL: if your plugin consists of many files, you may prefer to add the two above requires to your `spec/spec_helper.rb` or test setup files)
+
+
 ## Example
 
 See [lib/guard/compat/example.rb](https://github.com/guard/guard-compat/blob/master/lib/guard/compat/example.rb ) for an example plugin implementation.
