@@ -27,6 +27,7 @@ module Guard
 
     def run_on_modifications
       Guard::Compat::UI.color_enabled?
+      Guard::Compat.matching_files(self, ['foo'])
     end
   end
 end

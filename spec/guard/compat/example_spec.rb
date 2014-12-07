@@ -41,7 +41,12 @@ RSpec.describe Guard::MyPlugin, exclude_stubs: [Guard::Plugin] do
   end
 
   describe '#run_on_modifications' do
+    before do
+      allow(Guard::Compat).to receive(:matching_files)
+    end
+
     before { subject.run_on_modifications }
     specify { expect(Guard::Compat::UI).to have_received(:color_enabled?) }
+    specify { expect(Guard::Compat).to have_received(:matching_files) }
   end
 end

@@ -22,6 +22,18 @@ end
 
 module Guard
   module Compat
+    # TODO: this is just a temporary workaround to allow plugins
+    # to use watcher patterns in run_all
+    def self.matching_files(plugin, files)
+      unless Guard.const_defined?('Watcher')
+        msg = 'either Guard has not been required or you did not' \
+          ' stub this method in your plugin tests'
+        fail NotImplementedError, msg
+      end
+
+      Guard::Watcher.match_files(plugin, files)
+    end
+
     module UI
       def self.color(text, *colors)
         Guard::UI.send(:color, text, *colors)
