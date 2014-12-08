@@ -7,7 +7,7 @@ Currently, provides only a test helper for testing custom Guard plugins.
 In your gemspec:
 
 ```ruby
-s.add_dependency('guard-compat', '~> 0.3')
+s.add_dependency('guard-compat', '~> 1.0')
 ```
 
 In all your plugin files (e.g. `lib/guard/myplugin.rb`):
