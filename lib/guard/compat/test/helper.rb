@@ -7,11 +7,13 @@ module Guard
   class Plugin
     attr_reader :options
 
-    remove_method(:initialize)
+    alias_method :old_initialize, :initialize
 
     def initialize(options = {})
       @options = options
     end
+
+    remove_method(:old_initialize)
   end
 
   # Stub, but allow real Notifier to be used, because e.g. guard-minitest uses
