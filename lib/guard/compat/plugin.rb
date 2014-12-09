@@ -31,7 +31,9 @@ module Guard
         fail NotImplementedError, msg
       end
 
-      Guard::Watcher.match_files(plugin, files)
+      # TODO: uniq not tested
+      # TODO: resolve symlinks and then uniq?
+      Guard::Watcher.match_files(plugin, files).uniq
     end
 
     module UI
