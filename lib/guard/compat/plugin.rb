@@ -70,15 +70,15 @@ module Guard
       end
 
       def self.error(message, options = {})
-        Guard::UI.warning(message, options)
+        Guard::UI.error(message, options)
       end
 
       def self.debug(message, options = {})
-        Guard::UI.warning(message, options)
+        Guard::UI.debug(message, options)
       end
 
       def self.deprecation(message, options = {})
-        Guard::UI.warning(message, options)
+        Guard::UI.deprecation(message, options)
       end
 
       def self.notify(message, options = {})
