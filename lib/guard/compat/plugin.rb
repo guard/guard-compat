@@ -36,6 +36,22 @@ module Guard
       Guard::Watcher.match_files(plugin, files).uniq
     end
 
+    def self.watched_directories
+      unless Guard.const_defined?('CLI')
+        msg = 'either Guard has not been required or you did not' \
+          ' stub this method in your plugin tests'
+        fail NotImplementedError, msg
+      end
+
+      if Guard.respond_to?(:state)
+        # TODO: the new version is temporary
+        Guard.state.session.watchdirs.map { |d| Pathname(d) }
+      else
+        dirs = Array(Guard.options(:watchdir))
+        dirs.empty? ? [Pathname.pwd] : dirs.map { |d| Pathname(d) }
+      end
+    end
+
     module UI
       def self.color(text, *colors)
         Guard::UI.send(:color, text, *colors)

@@ -43,6 +43,7 @@ RSpec.describe Guard::MyPlugin, exclude_stubs: [Guard::Plugin] do
   describe '#run_on_modifications' do
     before do
       allow(Guard::Compat).to receive(:matching_files)
+      allow(Guard::Compat).to receive(:watched_directories)
     end
 
     before { subject.run_on_modifications }
