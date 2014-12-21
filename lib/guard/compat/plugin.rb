@@ -53,35 +53,67 @@ module Guard
 
     module UI
       def self.color(text, *colors)
-        Guard::UI.send(:color, text, *colors)
+        if Guard.const_defined?(:UI)
+          Guard::UI.send(:color, text, *colors)
+        else
+          text
+        end
       end
 
       def self.color_enabled?
-        Guard::UI.send(:color_enabled?)
+        if Guard.const_defined?(:UI)
+          Guard::UI.send(:color_enabled?)
+        else
+          false
+        end
       end
 
       def self.info(message, options = {})
-        Guard::UI.info(message, options)
+        if Guard.const_defined?(:UI)
+          Guard::UI.info(message, options)
+        else
+          $stdout.puts(message)
+        end
       end
 
       def self.warning(message, options = {})
-        Guard::UI.warning(message, options)
+        if Guard.const_defined?(:UI)
+          Guard::UI.warning(message, options)
+        else
+          $stdout.puts(message)
+        end
       end
 
       def self.error(message, options = {})
-        Guard::UI.error(message, options)
+        if Guard.const_defined?(:UI)
+          Guard::UI.error(message, options)
+        else
+          $stderr.puts(message)
+        end
       end
 
       def self.debug(message, options = {})
-        Guard::UI.debug(message, options)
+        if Guard.const_defined?(:UI)
+          Guard::UI.debug(message, options)
+        else
+          $stdout.puts(message)
+        end
       end
 
       def self.deprecation(message, options = {})
-        Guard::UI.deprecation(message, options)
+        if Guard.const_defined?(:UI)
+          Guard::UI.deprecation(message, options)
+        else
+          $stdout.puts(message)
+        end
       end
 
       def self.notify(message, options = {})
-        Guard::Notifier.notify(message, options)
+        if Guard.const_defined?(:UI)
+          Guard::Notifier.notify(message, options)
+        else
+          $stdout.puts(message)
+        end
       end
     end
   end
