@@ -27,9 +27,9 @@ end
 
 ### IMPORTANT
 
-1) Do not include *any* files from Guard directly (if you need something from Guard which Guard::Compat doesn't provide, file an issue)
-2) include 'guard/compat/plugin' is *all* your files which use `Guard::Plugin`
-3) make sure you include the `< Plugin` part in *every* file which add classes or methods to your plugin class (important if your plugin consists of multiple files/sub class)
+1. Do not include *any* files from Guard directly (if you need something from Guard which Guard::Compat doesn't provide, file an issue)
+2. Include 'guard/compat/plugin' is *all* your files which use `Guard::Plugin`
+3. Make sure you include the `< Plugin` part in *every* file which add classes or methods to your plugin class (important if your plugin consists of multiple files/sub class)
 
 
 And in your plugin tests (e.g. `spec/lib/guard/myplugin_spec.rb`):
