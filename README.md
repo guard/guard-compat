@@ -43,12 +43,29 @@ require 'guard/myplugin'
 
 (OPTIONAL: if your plugin consists of many files, you may prefer to add the two above requires to your `spec/spec_helper.rb` or test setup files)
 
+### Migrating your API calls
+
+`Guard::UI` => `Guard::Compat::UI` (or Compat::UI for short)
+`Guard::Notifier.notify` => `Guard::Compat::UI.notify`
+
+`Guard::Watcher.match_files` => `Guard::Compat.matching_files` (Watcher is otherwise unavailable - see Guard::Less template for passing patterns as plugin options)
+
+### New API
+
+* `Guard::UI.color` => for creating ANSI colored text if currently enabled in Guard
+* `Guard::UI.color_enabled?` => for checking if ANSI color output is currently enabled in Guard
+* `Guard::UI.watched_directories` => compatible way of obtaining watched_directories (recommended instead of accessing Watcher patterns or pattern subgroup hacks)
+
+(Open an issue if you feel something important is missing)
+
 
 ## Example
 
 See [lib/guard/compat/example.rb](https://github.com/guard/guard-compat/blob/master/lib/guard/compat/example.rb ) for an example plugin implementation.
 
 See [spec/guard/compat/example_spec.rb](https://github.com/guard/guard-compat/blob/master/spec/guard/compat/example_spec.rb) for an example on how to test plugins using Guard::Compat.
+
+See [spec/guard/compat/example_template_spec.rb](https://github.com/guard/guard-compat/blob/master/spec/guard/compat/example_template_spec.rb) for an example on how to test plugin templates.
 
 ## Contributing
 
