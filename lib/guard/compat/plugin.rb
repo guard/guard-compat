@@ -38,9 +38,8 @@ module Guard
 
     def self.watched_directories
       unless Guard.const_defined?('CLI')
-        msg = 'either Guard has not been required or you did not' \
-          ' stub this method in your plugin tests'
-        fail NotImplementedError, msg
+        fail NotImplementedError, 'either Guard has not been required or'\
+          ' you did not stub this method in your plugin tests'
       end
 
       if Guard.respond_to?(:state)
