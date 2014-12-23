@@ -30,6 +30,7 @@ end
 1. Do not include *any* files from Guard directly (if you need something from Guard which Guard::Compat doesn't provide, file an issue)
 2. Include 'guard/compat/plugin' is *all* your files which use `Guard::Plugin`
 3. Make sure you include the `< Plugin` part in *every* file which add classes or methods to your plugin class (important if your plugin consists of multiple files/sub class)
+4. Remove requires from your spec_helper and explicitly add them to each test/file
 
 
 And in your plugin tests (e.g. `spec/lib/guard/myplugin_spec.rb`):
@@ -39,9 +40,12 @@ require 'guard/compat/test/helper'
 require 'guard/myplugin'
 
 # And your tests instantiating your plugin go here...
+RSpec.describe Guard::Myplugin do
 ```
 
-(OPTIONAL: if your plugin consists of many files, you may prefer to add the two above requires to your `spec/spec_helper.rb` or test setup files)
+
+
+
 
 ### Migrating your API calls
 
