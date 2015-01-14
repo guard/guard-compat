@@ -108,12 +108,16 @@ module Guard
         end
       end
 
-      def self.notify(message, options = {})
-        if Guard.const_defined?(:UI)
-          Guard::Notifier.notify(message, options)
-        else
-          $stdout.puts(message)
-        end
+      def self.notify(msg, options = {})
+        return $stdout.puts(msg) unless Guard.const_defined?(:UI)
+        return Notifier.notify(msg, options) if Notifier.respond_to?(:notify)
+
+        # test helper was included
+        note = 'NOTE: Notification is disabled when testing Guard plugins'\
+          ' (it makes no sense)'
+
+        $stderr.puts(note)
+        $stdout.puts(msg)
       end
     end
   end
