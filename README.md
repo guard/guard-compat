@@ -28,7 +28,7 @@ end
 ### IMPORTANT
 
 1. Do not include *any* files from Guard directly (if you need something from Guard which Guard::Compat doesn't provide, file an issue)
-2. Include 'guard/compat/plugin' is *all* your files which use `Guard::Plugin`
+2. Include 'guard/compat/plugin' in *all* your files which use `Guard::Plugin`
 3. Make sure you include the `< Plugin` part in *every* file which add classes or methods to your plugin class (important if your plugin consists of multiple files/sub class)
 4. Remove requires from your spec_helper and explicitly add them to each test/file
 
