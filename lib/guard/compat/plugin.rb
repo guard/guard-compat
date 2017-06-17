@@ -51,6 +51,17 @@ module Guard
       end
     end
 
+    module API
+      def self.included(base)
+        if base.ancestors.any? { |c| c.name == 'Guard::Plugin' }
+          fail ArgumentError, 'You cannot include Guard::Compat::API in a'\
+            " class that inherits from Guard::Plugin: #{base.name}"
+        end
+
+        base.include(Guard::API) if Guard.const_defined?('API')
+      end
+    end
+
     module UI
       def self.color(text, *colors)
         if Guard.const_defined?(:UI)

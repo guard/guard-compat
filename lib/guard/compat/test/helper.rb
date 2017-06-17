@@ -16,6 +16,15 @@ module Guard
     remove_method(:old_initialize)
   end
 
+  # Monkey patch API to just keep the interface
+  module API
+    attr_reader :options
+
+    def initialize(options = {})
+      @options = options
+    end
+  end
+
   # Stub, but allow real Notifier to be used, because e.g. guard-minitest uses
   # is while guard-process is being tested
   unless Guard.const_defined?('Notifier')
