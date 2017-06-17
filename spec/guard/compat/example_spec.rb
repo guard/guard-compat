@@ -2,7 +2,7 @@
 require 'guard/compat/test/helper'
 require 'guard/compat/example'
 
-RSpec.describe Guard::MyPlugin, exclude_stubs: [Guard::Plugin] do
+RSpec.describe Guard::MyPlugin::Plugin do
   let(:options) { { foo: :bar } }
   subject { described_class.new(options) }
 
